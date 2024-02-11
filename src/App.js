@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Tooltip from "./Tooltip/Tooltip";
 
 function App() {
+  const [position, setPosition] = useState("top");
+  function handleChange() {
+    setPosition(document.getElementById("position").value);
+    console.log(document.getElementById("position").value);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <select id="position" onChange={() => handleChange()}>
+        <option value="top">TOP</option>
+        <option value="left">LEFT</option>
+        <option value="right">RIGHT</option>
+        <option value="bottom">BOTTOM</option>
+      </select>
+      <Tooltip position={position} toolTipText="ToolTip Text">
+        <button>Tooltip Button</button>
+      </Tooltip>
     </div>
   );
 }
